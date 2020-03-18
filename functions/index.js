@@ -46,8 +46,6 @@ app.use(session({
 const port = 3000;
 
 app.set("view engine", "ejs");
-
-app.use(cookieParser('keyboard cat'));
 app.use(express.static(__dirname + '/uploads'));
 
 app.use(flash());
