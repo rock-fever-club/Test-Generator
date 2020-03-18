@@ -70,7 +70,7 @@ app.post('*',function(req, res, next){
 
 //home route
 app.get('/', (req, res)=>{
-  res.render("home");
+  res.render("home",{errors:[]});
 });
 
 app.listen(port, function(){
