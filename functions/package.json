@@ -12,6 +12,8 @@
     "node": "8"
   },
   "dependencies": {
+    "ejs": "^3.0.1",
+    "ejs-lint": "^1.0.1",
     "express-flash": "0.0.2",
     "express-messages": "^1.0.1",
     "express-session": "^1.17.0",
