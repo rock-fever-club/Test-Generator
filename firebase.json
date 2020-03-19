@@ -2,7 +2,6 @@
   "hosting": {
     "site": "swayamkriti",
     "public": "public",
-    ,
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -15,6 +14,6 @@
              "key" : "Cache-Control",
              "value" : "max-age=1000000" //1 week+
          } ]
-       }
+       }]
   }
 }

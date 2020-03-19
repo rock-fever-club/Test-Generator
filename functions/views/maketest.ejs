@@ -1,0 +1,33 @@
+<%- include('partials/header'); -%>
+  <div class="container maketest">
+    <h1>SAE NIT KURUKSHETRA</h1>
+    <form method=POST action = "/process_ques"  class="new_test">
+      <div class="ques">
+      <div class="ques1">
+        Q1)
+        <textarea name ="ques1_body" placheolder="Type your question..." class="ques_body"></textarea>
+        <br>
+        <div class="ques_type">
+          <input type="radio" name="opt" value="objective" onclick="ques_type_ob(1)">
+          <label for="ob">Objective</label>
+          <label for="num-options" class="choices ques1_choices">Choices</label>
+          <select class="num-options  ques1_num_options" name="num_options" onclick="num_options_selection(1)">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <div class="ob-options ques1_ob_options">
+
+          </div>
+            <br>
+          <input type="radio" name="opt" value="subjective" onclick="ques_type_sub(1)">
+          <label for="sub">Subjective</label><br>
+        </div>
+      </div>
+      </div>
+      <button type="submit" class="final_gen_test">Create</button>
+      <a class="add_ques" onclick="add_ques()"><i style = "font-size:35px;color:white;" class="fa fa-plus" aria-hidden="true"></i></a>
+    </form>
+  </div>
+<%- include('partials/footer'); -%>

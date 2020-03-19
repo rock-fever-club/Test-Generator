@@ -73,6 +73,16 @@ app.get('/', (req, res)=>{
   res.render("home",{errors:[]});
 });
 
+//generate test route
+app.get('/generate_test', (req, res)=>{
+  res.render("maketest",{errors:[]});
+});
+
+//post request for generating test
+app.post("/process_ques",urlencodedParser,(req, res)=>{
+  console.log(req.body.ques2_num_options);
+});
+
 app.listen(port, function(){
   console.log("Listening to port "+ port);
 });

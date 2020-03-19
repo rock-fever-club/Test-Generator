@@ -3,10 +3,81 @@
 <head>
 	<title> Test Generator </title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="/assets/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/assets/css/main1.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		.home h1,.maketest h1{
+			text-align: center;
+			font-weight:bold;
+			font-size:50px;
+			margin-top: 50px;
+		}
+		.button{
+			text-align: center;
+			font-size:40px;
+			margin-top:200px;
+		}
+		.generate{
+			background-color: green;
+			padding:20px;
+			color:white;
+			font-weight: bold;
+			border:0px solid green;
+			border-radius:2%;
+		}
+		.maketest{
+			border:2px solid black;
+		}
+		.new_test{
+			margin-top:50px;
+		  padding-left:50px;
+			font-size:20px;
+		}
+		.ques_body{
+			width:80%;
+			height: 50px;
+			padding:5px;
+			margin-top:30px;
+		}
+		.ques_type{
+			margin-top:30px;
+			padding-bottom:30px;
+			font-size:20px;
+		}
+		.choices {
+			margin-left:50px;
+			display:none;
+		}
+		.ob-options{
+			margin-top:10px;
+			padding-left:50px;
+			display:none;
+		}
+		.num-options{
+			display:none;
+		}
+		.ob-options div{
+			padding-bottom:20px;
+		}
+		.final_gen_test{
+			padding:10px;
+			border:0px;
+			color:white;
+			background-color:blue;
+			font-size:20px;
+			font-weight:bold;
+			margin-bottom:20px;
+		}
+		.add_ques{
+			float:right;
+			margin-right:100px;
+			padding:10px;
+			padding-right:20px;
+			padding-left:20px;
+			background-color:green;
+			border:2px solid white;
+		}
+	</style>
 </head>
 <body>
 
@@ -20,8 +91,54 @@
 	<% } %>
 </div>
 <script>
+var ques  = 1;
 	setTimeout(function(){
 		document.querySelector(".message-log").style.display = 'none';
 	}, 3000);
+
+	function ques_type_ob(q){
+		var data = "";
+		document.querySelector(".ques" + q + "_choices").style.display = 'inline';
+		document.querySelector(".ques" + q +"_num_options").style.display = 'inline';
+		var n = document.querySelector(".ques" + q +"_num_options").value;
+		document.querySelector(".ques" + q +"_ob_options").style.display = 'block';
+		document.querySelector(".ques" + q +"_ob_options").innerHTML = "";
+		for(var i = 1; i <= n ; i++){
+			data = data + "<div class='" + "option" + i + "'>" + i +") <input type='text'name='ques"+q+"_option" + i +"'/>	</div>"
+		}
+		document.querySelector(".ques" + q +"_ob_options").innerHTML = data;
+	}
+
+	function ques_type_sub(q){
+		document.querySelector(".ques" + q + "_choices").style.display = 'none';
+		document.querySelector(".ques" + q +"_num_options").style.display = 'none';
+		document.querySelector(".ques" + q +"_ob_options").style.display = 'none';
+		document.querySelector(".ques" + q +"_ob_options").innerHTML = "";
+	}
+
+
+	function num_options_selection(q){
+		var data = "";
+		var n = document.querySelector(".ques" + q +"_num_options").value;
+		document.querySelector(".ques" + q +"_ob_options").innerHTML = "";
+		for(var i = 1; i <= n ; i++){
+			data = data + "<div class='option" + i + "'>" + i +") <input type='text' name='ques"+q+"_option" + i +  "'/>	</div>"
+		}
+		console.log(data);
+		document.querySelector(".ques" + q +"_ob_options").innerHTML = data;
+	}
+
+	function add_ques(){
+			ques++;
+		  var data ="";
+			data =  "<div class='ques" + ques + "'> Q" + ques + ") <textarea name ='ques" + ques + "_body' placheolder='Type your question...' class='ques_body'></textarea>"
+    +" <br> <div class='ques" + ques + "_type'> <input type='radio' name='ques" + ques + "_opt' value='objective' onclick='ques_type_ob(" + ques + ")'> <label for='ob'>Objective</label>   <label for='num-options' class='choices ques" + ques + "_choices'>Choices</label> <select class='num-options ques" + ques + "_num_options' name='ques" + ques + "_num_options' onclick='num_options_selection("+ ques + ")'> <option>2</option>"
+          + "<option>3</option> <option>4</option> <option>5</option></select><div class='ob-options ques" + ques+ "_ob_options'></div>  <br><input type='radio' name='ques" +ques+ "_opt' value='subjective' onclick='ques_type_sub("+ques+")'><label for='sub'>Subjective</label><br>  </div></div>";
+			var q = ".ques" + (ques - 1);
+			console.log(q);
+			document.querySelector(q).insertAdjacentHTML("afterend", data);
+			console.log(data);
+
+	}
 </script>
 	</div>
