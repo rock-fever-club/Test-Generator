@@ -1,0 +1,27 @@
+<%- include('partials/header'); -%>
+<div class="container maketest">
+  <h1>SAE NIT KURUKSHETRA</h1>
+  <form method=POST action="/submit_test">
+    <div class="test">
+      <p class="num_ques" style="font-size:20px;">Total no of ques: <%=data.number%></p>
+      <p class="time_remaining" style="font-size:20px;float:right;">Time Remaining: <%=data.time%> min</p>
+      <label style="font-size:20px;" for="name" >Name: </label>
+      <input class="name" name = "name" style="font-size:20px;" type="text"/>
+      <% var num = parseInt(data.number); for(var i = 1; i <= num; i++){ var foo = "ques" + i + "_body"%>
+        <div class="ques_body" style="font-size:20px;">
+          <label>Q<%=i%>) <%=data[foo]%></label>
+        </div>
+          <%foo = "ques" + i + "_opt";if(data[foo] == "subjective"){%>
+            <textarea class = "answer answer_space <%='answer' + i%> " name = <%='answer' + i%> style="font-size:20px;"></textarea>
+          <%}else{  foo = "ques" + i + "_num_options"; var n = parseInt(data[foo]); for(var j = 1; j <= n; j++){foo = "ques" + i + "_option" + j;%>
+            <input style="margin-left:20px;" type = "radio" value = "<%=data[foo]%>"  class = 'answer_space'  name = <%="answer" + i%> />
+            <label class='options' for = <%="answer" + i%>><%=data[foo]%></label>
+      <% }}}%>
+    </div>
+
+    <div class="button" >
+    <button type="submit" style="background-color:blue;" class="generate">Submit</button>
+    </div>
+</form>
+  </div>
+<%- include('partials/footer'); -%>

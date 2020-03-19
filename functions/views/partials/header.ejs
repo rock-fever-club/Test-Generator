@@ -79,6 +79,7 @@
 		}
 		.answer{
 			width:100%;
+			height:150px;
 		}
 		.options{
 			font-size:20px;
@@ -89,7 +90,7 @@
 		}
 	</style>
 </head>
-<body>
+<body onload="timer()">
 
 <div class="fluid-container message-log" >
 	<div class="msg">
@@ -157,5 +158,36 @@ var ques  = 1;
         return false;
     return true;
 }
+
+	function timer(){
+		var x, i;
+		 x = document.querySelectorAll(".answer_space");
+		 for (i = 0; i < x.length; i++) {
+			 x[i].required = true;
+ }
+ document.querySelectorAll(".name").required = true;
+		var d = document.querySelector('.time_remaining').textContent;
+		var t = d.slice(16);
+		var p  = parseInt(t.slice(0,-3));
+		p = p * 60;
+		var n = document.querySelector('.num_ques').textContent;
+		n = n.slice(18);
+		console.log(n);
+		var num = parseInt(n);
+		var l = setInterval(()=>{
+			p--;
+			document.querySelector('.time_remaining').textContent = "Time Remaining: " + parseInt(p /60) + "min " + (p % 60) + "s";
+			if(p == 0) {
+				clearInterval(l);
+				document.querySelector('.test').style.display="none";
+				var x, i;
+				 x = document.querySelectorAll(".answer_space");
+				 for (i = 0; i < x.length; i++) {
+					 x[i].required = false;
+		 }
+		 document.querySelector(".name").required = false;
+				}
+		}, 1000);
+	}
 </script>
 	</div>

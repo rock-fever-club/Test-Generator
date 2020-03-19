@@ -2,6 +2,8 @@
 <div class="container maketest">
   <h1>SAE NIT KURUKSHETRA</h1>
     <div class="test">
+      <p style="font-size:20px;">Total no of ques: <%=data.number%></p>
+      <p style="font-size:20px;float:right;">Total Time: <%=data.time%> min</p>
       <% var num = parseInt(data.number); for(var i = 1; i <= num; i++){ var foo = "ques" + i + "_body"%>
         <div class="ques_body" style="font-size:20px;">
           <label>Q<%=i%>) <%=data[foo]%></label>

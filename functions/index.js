@@ -148,4 +148,33 @@ app.get("/finalize",(req, res)=>{
   res.redirect('/');
 });
 
+//handle test attempt Request
+app.get("/test/:code",(req, res)=>{
+  var code = req.params.code;
+  db.collection('test').doc(code).get().then(doc=>{
+  res.render("test_paper",{data:doc.data()});
+  });
+});
+
+//handle submit test route
+app.post("/submit_test",urlencodedParser,(req, res)=>{
+
+  console.log(JSON.stringify(req.body));
+  var mailOptions={
+                 to : "amitsrawat2000@gmail.com",
+                 cc: ['jaisinglanrw@gmail.com'],
+                 subject : "Response",
+                 text: JSON.stringify(req.body)
+              }
+
+              smtpTransport.sendMail(mailOptions, function(error, response){
+              if(error){
+              console.log(error);
+              res.end("error");
+              }else{
+                console.log("mail is sent");
+                res.send("Your test is successfully submited!");
+              }
+              });
+});
 exports.app = functions.https.onRequest(app);
