@@ -80,11 +80,15 @@ app.get('/generate_test', (req, res)=>{
 
 //post request for generating test
 app.post("/process_ques",urlencodedParser,(req, res)=>{
-  console.log(req.body);
+//  console.log(req.body);
   var n = req.body.number;
   var code = req.body.code;
-  db.collection('test').doc(code).set({length:n});
-  for(var i = 1; i <= n ;i++){
+  var time = req.body.time;
+  var data = req.body;
+  data.length = n;
+  data.time = time;
+  db.collection('test').doc(code).set(data);
+  /*for(var i = 1; i <= n ;i++){
     var foo = "ques" + i + "_body";
     var ques_body = req.body[foo];
     foo = "ques" + i + "_opt";
@@ -119,11 +123,29 @@ app.post("/process_ques",urlencodedParser,(req, res)=>{
       }
     }
     db.collection('test').doc(code).collection("ques" + i).doc("ques" + i).set(data);
-  }
+  }*/
+  res.redirect("/preview/" + code);
 });
 
 app.listen(port, function(){
   console.log("Listening to port "+ port);
+});
+
+//handle preview on Request
+app.get("/preview/:code",(req, res)=>{
+  var code = req.params.code;
+  var data = {};
+  db.collection('test').doc(code).get().then(doc=>{
+    data = doc.data();
+    console.log(data);
+    res.render("preview_test", {data:data});
+  });
+});
+
+//handle finalize Request
+app.get("/finalize",(req, res)=>{
+  req.flash('success',"Your test is successfully generated!");
+  res.redirect('/');
 });
 
 exports.app = functions.https.onRequest(app);

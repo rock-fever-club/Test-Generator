@@ -77,6 +77,16 @@
 			background-color:green;
 			border:2px solid white;
 		}
+		.answer{
+			width:100%;
+		}
+		.options{
+			font-size:20px;
+			margin-right:50px;
+		}
+		.generate{
+			margin-bottom:50px;
+		}
 	</style>
 </head>
 <body>
@@ -140,5 +150,12 @@ var ques  = 1;
 			console.log(data);
 			document.querySelector('.number').value  = ques;
 	}
+
+	function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
 </script>
 	</div>

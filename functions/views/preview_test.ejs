@@ -1,0 +1,21 @@
+<%- include('partials/header'); -%>
+<div class="container maketest">
+  <h1>SAE NIT KURUKSHETRA</h1>
+    <div class="test">
+      <% var num = parseInt(data.number); for(var i = 1; i <= num; i++){ var foo = "ques" + i + "_body"%>
+        <div class="ques_body" style="font-size:20px;">
+          <label>Q<%=i%>) <%=data[foo]%></label>
+        </div>
+          <%foo = "ques" + i + "_opt";if(data[foo] == "subjective"){%>
+            <textarea class = "answer" name=<%='answer' + i%> ></textarea>
+          <%}else{  foo = "ques" + i + "_num_options"; var n = parseInt(data[foo]); for(var j = 1; j <= n; j++){foo = "ques" + i + "_option" + j;%>
+            <input style="margin-left:20px;" type = "radio"  name = <%="answer" + i%>/>
+            <label class="options" for = <%="answer" + i%>><%=data[foo]%></label>
+      <% }}}%>
+    </div>
+    <div class="button">
+      <a href="/finalize"><button class="generate">Generate</button></a>
+    </div>
+
+  </div>
+<%- include('partials/footer'); -%>

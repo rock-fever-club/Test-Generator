@@ -10,7 +10,7 @@
         <br>
         <div class="ques_type">
           <input type="radio" name="ques1_opt" value="objective" onclick="ques_type_ob(1)">
-          <label class="objective" for="ob">Objective</label>
+          <label class="objective" for="ques1_opt">Objective</label>
           <label for="num-options" class="choices ques1_choices">Choices</label>
           <select class="num-options  ques1_num_options" name="ques1_num_options" onclick="num_options_selection(1)">
             <option>2</option>
@@ -30,6 +30,8 @@
       <div class="test_details" style="margin-bottom:50px;">
         <label for="code">Code of test</label>
         <input name="code" required/>
+        <label for="time">Total Time(in mins.)</label>
+        <input type = "tel" name="time" onkeypress="return isNumberKey(event)" required/>
       </div>
       <button type="submit" class="final_gen_test">Create</button>
       <a class="add_ques" onclick="add_ques()"><i style = "font-size:35px;color:white;" class="fa fa-plus" aria-hidden="true"></i></a>
