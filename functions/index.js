@@ -24,7 +24,7 @@ firebaseConfig.credential = admin.credential.cert(serviceAccount);
 
 //Firebase app initialization
 admin.initializeApp(firebaseConfig);
-var me = admin.database();
+var db = admin.firestore();
 let smtpTransport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -80,7 +80,46 @@ app.get('/generate_test', (req, res)=>{
 
 //post request for generating test
 app.post("/process_ques",urlencodedParser,(req, res)=>{
-  console.log(req.body.ques2_num_options);
+  console.log(req.body);
+  var n = req.body.number;
+  var code = req.body.code;
+  db.collection('test').doc(code).set({length:n});
+  for(var i = 1; i <= n ;i++){
+    var foo = "ques" + i + "_body";
+    var ques_body = req.body[foo];
+    foo = "ques" + i + "_opt";
+    var ques_type = req.body[foo];
+    var num_options = 0;
+    var flag = 0;
+    if(ques_type == "objective"){
+      foo = "ques" + i + "_num_options";
+      num_options = req.body[foo];
+      flag = 1;
+    }
+    var options = [];
+    if(flag == 1){
+      for(var j = 1; j <= parseInt(num_options);j++){
+        foo = "ques" + i + "_option" + j;
+        options[j - 1] = req.body[foo];
+      }
+    }
+    if(flag == 0){
+      data = {
+        n:num_options,
+        body:ques_body,
+        type: ques_type
+      }
+    }
+    else {
+      data = {
+        n:num_options,
+        body:ques_body,
+        type: ques_type,
+        options:options
+      }
+    }
+    db.collection('test').doc(code).collection("ques" + i).doc("ques" + i).set(data);
+  }
 });
 
 app.listen(port, function(){

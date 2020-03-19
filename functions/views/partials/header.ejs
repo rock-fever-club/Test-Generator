@@ -132,13 +132,13 @@ var ques  = 1;
 			ques++;
 		  var data ="";
 			data =  "<div class='ques" + ques + "'> Q" + ques + ") <textarea name ='ques" + ques + "_body' placheolder='Type your question...' class='ques_body'></textarea>"
-    +" <br> <div class='ques" + ques + "_type'> <input type='radio' name='ques" + ques + "_opt' value='objective' onclick='ques_type_ob(" + ques + ")'> <label for='ob'>Objective</label>   <label for='num-options' class='choices ques" + ques + "_choices'>Choices</label> <select class='num-options ques" + ques + "_num_options' name='ques" + ques + "_num_options' onclick='num_options_selection("+ ques + ")'> <option>2</option>"
+    +" <br> <div class='ques_type'> <input type='radio' name='ques" + ques + "_opt' value='objective' onclick='ques_type_ob(" + ques + ")'> <label for='ob'>Objective</label>   <label for='num-options' class='choices ques" + ques + "_choices'>Choices</label> <select class='num-options ques" + ques + "_num_options' name='ques" + ques + "_num_options' onclick='num_options_selection("+ ques + ")'> <option>2</option>"
           + "<option>3</option> <option>4</option> <option>5</option></select><div class='ob-options ques" + ques+ "_ob_options'></div>  <br><input type='radio' name='ques" +ques+ "_opt' value='subjective' onclick='ques_type_sub("+ques+")'><label for='sub'>Subjective</label><br>  </div></div>";
 			var q = ".ques" + (ques - 1);
 			console.log(q);
 			document.querySelector(q).insertAdjacentHTML("afterend", data);
 			console.log(data);
-
+			document.querySelector('.number').value  = ques;
 	}
 </script>
 	</div>
