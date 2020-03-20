@@ -38,6 +38,7 @@
 			height: 50px;
 			padding:5px;
 			margin-top:30px;
+			margin-bottom:20px;
 		}
 		.ques_type{
 			margin-top:30px;
@@ -93,7 +94,7 @@
 		}
 	</style>
 </head>
-<body onload="timer()">
+<body onload="timer()" onkeydown="return (event.keyCode != 116)" oncut="return false" onpaste="return false">
 
 <div class="fluid-container message-log" >
 	<div class="msg">
@@ -163,11 +164,11 @@ var ques  = 1;
 }
 
 	function timer(){
-		var x, i;
+		/*var x, i;
 		 x = document.querySelectorAll(".answer_space");
 		 for (i = 0; i < x.length; i++) {
 			 x[i].required = true;
- }
+ }*/
  document.querySelectorAll(".name").required = true;
 		var d = document.querySelector('.time_remaining').textContent;
 		var t = d.slice(16);
@@ -183,11 +184,11 @@ var ques  = 1;
 			if(p == 0) {
 				clearInterval(l);
 				document.querySelector('.test').style.display="none";
-				var x, i;
+				/*var x, i;
 				 x = document.querySelectorAll(".answer_space");
 				 for (i = 0; i < x.length; i++) {
 					 x[i].required = false;
-		 }
+		 }*/
 		 document.querySelector(".name").required = false;
 				}
 		}, 1000);

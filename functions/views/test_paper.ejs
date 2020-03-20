@@ -24,4 +24,10 @@
     </div>
 </form>
   </div>
+  <script type="text/javascript">
+    window.onbeforeunload = function() {
+      console.log("helllo man");
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
+</script>
 <%- include('partials/footer'); -%>
